@@ -14,23 +14,30 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 5000))
 
-var ipLookup = function(ip) {
+var ipLookupCountryCode = function(ip) {
   if (typeof ip !== 'undefined' && ip !== null) {
     var geo = geoIP.lookup(ip);
-    console.log(geo);
+    return geo.country;
+  } else {
+    return 'US';
   }
 }
 
 app.get('/', function(request, response) {
-  ipLookup(request.get('x-forwarded-for'));
+  var countryCode = ipLookupCountryCode(request.get('x-forwarded-for'));
+  console.log(countryCode);
   response.render('main');
 });
 
 app.post('/', function(request, response) {
+  var countryCode = ipLookupCountryCode(request.get('x-forwarded-for'));
+  console.log(countryCode);
   response.send('phone ' + request.body.number);
 });
 
 app.get('/:number', function(request, response) {
+  var countryCode = ipLookupCountryCode(request.get('x-forwarded-for'));
+  console.log(countryCode);
   response.send('phone ' + request.params.number);
 });
 
