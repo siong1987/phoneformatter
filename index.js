@@ -17,11 +17,11 @@ app.get('/', function(request, response) {
   response.render('main');
 });
 
-app.post('/phone', function(request, response) {
+app.post('/', function(request, response) {
   response.send('phone ' + request.body.number);
 });
 
-app.get('/phone/:number', function(request, response) {
+app.get('/:number', function(request, response) {
   response.send('phone ' + request.params.number);
 });
 
