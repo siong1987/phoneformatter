@@ -1,0 +1,20 @@
+{
+  "name": "phoneformatter",
+  "version": "1.0.0",
+  "description": "API for formatting phone number.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "0.12.x"
+  },
+  "author": "Teng Siong Ong",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.3.1",
+    "express": "^4.12.4",
+    "google-libphonenumber": "^0.2.2"
+  }
+}
