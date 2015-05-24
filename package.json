@@ -14,9 +14,10 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.12.4",
+    "cors": "^2.6.0",
     "ejs": "^2.3.1",
     "express": "^4.12.4",
     "geoip-lite": "^1.1.6",
-    "google-libphonenumber": "^0.2.2"
+    "google-libphonenumber": "git://github.com/seegno/google-libphonenumber.git"
   }
 }
