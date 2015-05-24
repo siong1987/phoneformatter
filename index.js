@@ -15,8 +15,10 @@ app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 5000))
 
 var ipLookup = function(ip) {
-  var geo = geoip.lookup(ip);
-  console.log(geo);
+  if (typeof ip !== 'undefined' && ip !== null) {
+    var geo = geoIP.lookup(ip);
+    console.log(geo);
+  }
 }
 
 app.get('/', function(request, response) {
@@ -30,4 +32,8 @@ app.post('/', function(request, response) {
 
 app.get('/:number', function(request, response) {
   response.send('phone ' + request.params.number);
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running at localhost:' + app.get('port'));
 });
