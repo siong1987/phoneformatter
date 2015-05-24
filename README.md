@@ -1,3 +1,3 @@
 # PhoneFormatter
 
-[PhoneFormatter](http://phoneformatter.com) is API for formatting phone number.
+[PhoneFormatter](http://phoneformatter.com) is a simple API for formatting phone number.
