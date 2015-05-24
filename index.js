@@ -33,7 +33,7 @@ var ipLookupCountryCode = function(ip) {
 var parseNumber = function(regionCode, phoneNumber) {
   var number = phoneUtil.parseAndKeepRawInput(phoneNumber, regionCode);
   var isPossible = phoneUtil.isPossibleNumber(number);
-  var reason = 'UNKNOWN';
+  var invalid_reason = 'UNKNOWN';
   var isNumberValid = false;
   var isNumberValidForRegion = false;
   var regionCode = regionCode;
@@ -41,16 +41,16 @@ var parseNumber = function(regionCode, phoneNumber) {
   if (!isPossible) {
     switch (phoneUtil.isPossibleNumberWithReason(number)) {
       case PNV.INVALID_COUNTRY_CODE:
-        reason = 'INVALID_COUNTRY_CODE';
+        invalid_reason = 'INVALID_COUNTRY_CODE';
         break;
       case PNV.TOO_SHORT:
-        reason = 'TOO_SHORT';
+        invalid_reason = 'TOO_SHORT';
         break;
       case PNV.TOO_LONG:
-        reason = 'TOO_LONG';
+        invalid_reason = 'TOO_LONG';
         break;
     }
-    reason = 'UNKNOWN';
+    invalid_reason = 'UNKNOWN';
   } else {
     isNumberValid = phoneUtil.isValidNumber(number);
     if (isNumberValid && regionCode && regionCode != 'ZZ') {
@@ -111,8 +111,9 @@ var parseNumber = function(regionCode, phoneNumber) {
   }
 
   return {
+    raw_input: phoneNumber,
     is_possible: isPossible,
-    reason: reason,
+    invalid_reason: invalid_reason,
     is_valid: isNumberValid,
     is_valid_for_region: isNumberValidForRegion,
     region_code: regionCode,

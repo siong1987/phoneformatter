@@ -21,6 +21,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/app.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -33,9 +34,117 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+      <div class="column main">
+        <h4>Phone Formatter</h4>
+        <p><a href="/">PhoneFormatter</a> is a free API for formatting phone number that supports <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a>. The API is using the famous <a href="https://github.com/googlei18n/libphonenumber">libphonenumber</a> library.</p>
+        <p class="list">A simple cURL example:</p>
+        <pre class="code">
+curl -d "phone_number=2178196984&country_code=US" http://phoneformatter.com/
+        </pre>
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>phone_number</td>
+              <td>This can be a partial phone number if you want to make use of the as you type formatter.</td>
+            </tr>
+            <tr>
+              <td>country_code</td>
+              <td>If it isn't provided, the API will try to deduce it from the origin IP of the request or it will default back to US.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="list">JSON response:</p>
+        <pre class="code">
+{
+  "raw_input": "2178196984",
+  "is_possible":true,
+  "invalid_reason":"UNKNOWN",
+  "is_valid":true,
+  "is_valid_for_region":true,
+  "region_code":"US",
+  "number_type":"FIXED_LINE_OR_MOBILE",
+  "original_format":"(217) 819-6984",
+  "e164_format":"+12178196984",
+  "national_format":"(217) 819-6984",
+  "international_format":"+1 217-819-6984",
+  "as_you_type_formatter": [
+    { "input_char":"2", "output":"2" },
+    { "input_char":"1", "output":"21" },
+    { "input_char":"7", "output":"217" },
+    { "input_char":"8", "output":"217-8" },
+    { "input_char":"1", "output":"217-81" },
+    { "input_char":"9", "output":"217-819" },
+    { "input_char":"6", "output":"217-8196" },
+    { "input_char":"9", "output":"(217) 819-69" },
+    { "input_char":"8", "output":"(217) 819-698" },
+    { "input_char":"4", "output":"(217) 819-6984"}
+  ]
+}
+        </pre>
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>raw_input</td>
+              <td>The raw input phone number that is passed in.</td>
+            </tr>
+            <tr>
+              <td>is_possible</td>
+              <td>true/false: whether it is a possible phone number.</td>
+            </tr>
+            <tr>
+              <td>invalid_reason</td>
+              <td>If the provided phone number is invalid, the reason will be stated here.</td>
+            </tr>
+            <tr>
+              <td>is_valid</td>
+              <td>true/false: whether it is a valid phone number.</td>
+            </tr>
+            <tr>
+              <td>is_valid_for_region</td>
+              <td>true/false: whether it is a valid phone number for the region.</td>
+            </tr>
+            <tr>
+              <td>region_code</td>
+              <td>The region code for the phone number.</td>
+            </tr>
+            <tr>
+              <td>number_type</td>
+              <td>The possible type for this phone number.</td>
+            </tr>
+            <tr>
+              <td>original_format</td>
+              <td>The original format that the phone number is parsed from.</td>
+            </tr>
+            <tr>
+              <td>e164_format</td>
+              <td>The E164 format for this phone number.</td>
+            </tr>
+            <tr>
+              <td>national_format</td>
+              <td>The national format for this phone number.</td>
+            </tr>
+            <tr>
+              <td>international_format</td>
+              <td>The international format for this phone number.</td>
+            </tr>
+            <tr>
+              <td>as_you_type_formatter</td>
+              <td>An array of input characters that each input character matches to the output formatted phone number.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
