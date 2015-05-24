@@ -1,4 +1,5 @@
 var phoneNumberFormat = require('google-libphonenumber').PhoneNumberFormat;
+var geoIP = require('geoip-lite');
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -13,9 +14,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 5000))
 
+var ipLookup = function(ip) {
+  var geo = geoip.lookup(ip);
+  console.log(geo);
+}
+
 app.get('/', function(request, response) {
-  console.log(request.headers);
-  console.log(request.get('CF-IPCountry'));
+  ipLookup(request.get('x-forwarded-for'));
   response.render('main');
 });
 
@@ -25,8 +30,4 @@ app.post('/', function(request, response) {
 
 app.get('/:number', function(request, response) {
   response.send('phone ' + request.params.number);
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running at localhost:' + app.get('port'));
 });
