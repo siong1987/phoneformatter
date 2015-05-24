@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');
 app.set('port', (process.env.PORT || 5000))
 
 app.get('/', function(request, response) {
+  console.log(request.headers);
   console.log(request.get('CF-IPCountry'));
   response.render('main');
 });
